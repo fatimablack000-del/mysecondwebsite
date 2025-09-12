@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- AOS CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: url("images/pic3.png") no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Poppins', sans-serif;
+      color: #000;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      transition: all 0.4s ease;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      background: linear-gradient(90deg, #c7a9f7, #f7a9d0);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .navbar .nav-link {
+      color: #000 !important;
+      font-weight: 600;
+      position: relative;
+      transition: 0.3s;
+    }
+    .navbar .nav-link::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      left: 0;
+      bottom: -4px;
+      background: #800080;
+      transition: 0.3s;
+    }
+    .navbar .nav-link:hover::after { width: 100%; }
+    .navbar-brand { font-weight: 700; color: #000 !important; }
+
+    /* ===== TOGGLE ===== */
+    .mode-toggle {
+      display: flex;
+      align-items: center;
+      background: #eaeaea;
+      border-radius: 30px;
+      padding: 5px 15px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .mode-toggle i { margin-left: 8px; }
+    body.dark-mode .mode-toggle { background: #111; color: #fff; }
+
+    /* ===== BUTTONS ===== */
+    .btn-custom {
+      background: linear-gradient(90deg, #800080, #d63384);
+      border: none;
+      color: #fff;
+      padding: 10px 25px;
+      border-radius: 50px;
+      transition: 0.3s;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(128, 0, 128, 0.3);
+    }
+    .btn-custom:hover {
+      background: linear-gradient(90deg, #660066, #b52d70);
+      transform: scale(1.07);
+      box-shadow: 0 6px 18px rgba(128, 0, 128, 0.4);
+    }
+
+    section { padding: 100px 20px; }
+
+    /* ===== HERO ===== */
+    #home { min-height: 100vh; padding: 140px 8% 80px; }
+    #home .row { align-items: center; }
+    #home h1 { font-size: 3rem; font-weight: 800; line-height: 1.3; }
+    #home .highlight { color: #800080; }
+    #home p {
+      max-width: 520px;
+      margin-top: 20px;
+      color: #333;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .profile-img {
+      max-width: 300px;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      object-fit: cover;
+      box-shadow: 0 8px 25px rgba(128, 0, 128, 0.3);
+      transition: transform 0.4s;
+    }
+    .profile-img:hover { transform: scale(1.05); }
+
+    /* ===== SECTION TITLES ===== */
+    .section-title {
+      font-size: 2.3rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      text-align: center;
+      color: #800080;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: "";
+      display: block;
+      height: 4px;
+      width: 60%;
+      margin: 10px auto 0;
+      background: linear-gradient(90deg, #800080, #d63384);
+      border-radius: 2px;
+    }
+
+    /* ===== GLASS CARDS ===== */
+    .card,
+    .timeline-content,
+    .resume-card,
+    .skill-card,
+    .education-card {
+      background: rgba(255, 255, 255, 0.6);
+      border: none;
+      border-radius: 15px;
+      padding: 20px;
+      color: #000;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+    .card:hover,
+    .timeline-content:hover,
+    .resume-card:hover,
+    .skill-card:hover,
+    .education-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: linear-gradient(90deg, #c7a9f7, #f7a9d0);
+      padding: 30px 20px;
+      text-align: center;
+      color: #000;
+      font-size: 0.95rem;
+    }
+    .footer a {
+      color: #800080;
+      margin: 0 12px;
+      font-size: 1.4rem;
+      transition: 0.3s;
+    }
+    .footer a:hover { color: #000; transform: scale(1.2); }
+
+    /* ===== DARK MODE ===== */
+    body.dark-mode {
+      background: url("images/PIC4.png") no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+    body.dark-mode .navbar { background: rgba(20, 0, 30, 0.9); }
+    body.dark-mode .navbar .nav-link,
+    body.dark-mode .navbar-brand { color: #fff !important; }
+    body.dark-mode .btn-custom {
+      background: linear-gradient(90deg, #a445f7, #ff69b4);
+      box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+    }
+    body.dark-mode .btn-custom:hover {
+      background: linear-gradient(90deg, #8228d6, #ff4da6);
+      box-shadow: 0 6px 18px rgba(255, 105, 180, 0.4);
+    }
+    body.dark-mode .section-title { color: #ff69b4; }
+    body.dark-mode .section-title::after {
+      background: linear-gradient(90deg, #a445f7, #ff69b4);
+    }
+    body.dark-mode .card,
+    body.dark-mode .timeline-content,
+    body.dark-mode .resume-card,
+    body.dark-mode .skill-card,
+    body.dark-mode .education-card {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    body.dark-mode .footer {
+      background: rgba(20, 0, 30, 0.95);
+      color: #fff;
+    }
+    body.dark-mode .footer a { color: #ff69b4; }
+
+    /* Force text white in dark mode */
+    body.dark-mode p,
+    body.dark-mode li,
+    body.dark-mode h1,
+    body.dark-mode h2,
+    body.dark-mode h3,
+    body.dark-mode h4,
+    body.dark-mode h5,
+    body.dark-mode h6,
+    body.dark-mode a {
+      color: #ffffff !important;
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top px-5">
+    <a class="navbar-brand fw-bold" href="#">IFGG_Portfolio</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse ms-auto" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item mx-2"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item mx-2"><a class="nav-link" href="#resume">Resume</a></li>
+        <li class="nav-item mx-2"><a class="nav-link" href="#portfolio">Projects</a></li>
+        <li class="nav-item mx-2"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item mx-2"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+      <!-- Toggle Switch -->
+      <div class="mode-toggle ms-3" id="modeToggle">
+        <span id="modeText">Light Mode</span>
+        <i class="fas fa-sun"></i>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" data-aos="fade-up">
+    <div class="row">
+      <div class="col-md-7">
+        <h1> I am an<br>
+          <span class="highlight">IT student, Learner</span><br>
+          & Aspiring Developer
+        </h1>
+        <p>I’m Fatima Grace G. Itom a student at St. Paul University Surigao studying BS in Information Technology. My goal is to improve my skills, gain experience through projects, and explore how technology and creativity can solve real-life problems.</p>
+        <a href="#contact" class="btn-custom mt-4 d-inline-block">Contact Me</a>
+        <a href="#resume" class="btn-custom mt-4 d-inline-block ms-2">View Resume</a>
+      </div>
+      <div class="col-md-5 text-center">
+        <img src="images/pic1.png" alt="Profile Photo" class="profile-img" data-aos="zoom-in">
+      </div>
+    </div>
+  </section>
+
+<!-- Resume / CV -->
+<section id="resume" data-aos="fade-up" class="py-5">
+  <div class="container">
+    <h2 class="section-title text-center mb-5">Resume / CV</h2>
+
+    <!-- Education Timeline -->
+    <h4 class="fw-bold mb-4 text-primary text-center">Education</h4>
+    <div class="timeline">
+
+      <!-- College - Current -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content glass-card">
+          <h5 class="fw-bold">BS Information Technology</h5>
+          <p class="mb-1"><i class="bi bi-mortarboard-fill"></i> St. Paul University Surigao</p>
+          <small>2nd Year – Ongoing</small>
+        </div>
+      </div>
+
+      <!-- College - Past -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content glass-card">
+          <h5 class="fw-bold">BS Business Management, Major in Economics</h5>
+          <p class="mb-1"><i class="bi bi-mortarboard-fill"></i> Silliman University</p>
+          <small>Completed 1 Year</small>
+        </div>
+      </div>
+
+      <!-- High School -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content glass-card">
+          <h5 class="fw-bold">Junior & Senior High School</h5>
+          <p class="mb-1"><i class="bi bi-book-fill"></i> Don Ruben Edera Ecleo Sr. Memorial NHS</p>
+        </div>
+      </div>
+
+      <!-- Elementary -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content glass-card">
+          <h5 class="fw-bold">Primary Education</h5>
+          <p class="mb-1"><i class="bi bi-pencil-fill"></i> San Juan Elementary School</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-5">
+      <div class="container text-center">
+        <h2 class="section-title mb-5">Skills</h2>
+        <div class="row g-4 justify-content-center">
+
+          <!-- Technical -->
+          <div class="col-md-4">
+            <div class="glass-card h-100">
+              <h4 class="fw-bold text-success">Technical</h4>
+              <p>
+                Can build simple websites using <strong>HTML</strong> and 
+                <strong>CSS</strong>, with basic <strong>JavaScript</strong>.
+              </p>
+            </div>
+          </div>
+
+          <!-- Academic -->
+          <div class="col-md-4">
+            <div class="glass-card h-100">
+              <h4 class="fw-bold text-primary">Academic</h4>
+              <p>
+                Experienced in <strong>Research</strong>, 
+                <strong>Academic Writing</strong>, and <strong>Presentations</strong>.
+              </p>
+            </div>
+          </div>
+
+          <!-- Soft Skills -->
+          <div class="col-md-4">
+            <div class="glass-card h-100">
+              <h4 class="fw-bold text-warning">Soft Skills</h4>
+              <p>
+                Strong <strong>Communication</strong>, <strong>Teamwork</strong>, 
+                and <strong>Leadership</strong>. Adaptable and skilled in 
+                <strong>Problem-Solving</strong>.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Download CV -->
+    <div class="text-center mt-5">
+      <a href="resume.pdf" class="btn btn-primary btn-lg rounded-pill shadow-sm">
+        <i class="bi bi-download"></i> Download CV
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- Resume & Glassy CSS -->
+<style>
+/* Shared Glassy Style */
+.glass-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #000;
+}
+
+.glass-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  margin: 0 auto;
+  padding: 2rem 0;
+  max-width: 800px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 100%;
+  background: #ccc;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 4rem;
+  width: 50%;
+  padding: 0 1rem;
+}
+.timeline-item:nth-child(odd) {
+  left: 0;
+  text-align: right;
+}
+.timeline-item:nth-child(even) {
+  left: 50%;
+  text-align: left;
+}
+
+.timeline-dot {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+  background: #6c63ff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px #fff;
+  z-index: 2;
+}
+
+.timeline-content {
+  margin-top: 40px; /* space below dot */
+}
+
+/* Arrows */
+.timeline-item:nth-child(odd) .timeline-content::after {
+  content: "";
+  position: absolute;
+  top: 20px;
+  right: -10px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent transparent rgba(255, 255, 255, 0.15);
+}
+.timeline-item:nth-child(even) .timeline-content::after {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: -10px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent rgba(255, 255, 255, 0.15) transparent transparent;
+}
+
+/* Dark mode */
+body.dark-mode .timeline::before { background: #666; }
+body.dark-mode .timeline-dot { background: #ff69b4; box-shadow: 0 0 0 4px #222; }
+body.dark-mode .glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+body.dark-mode .timeline-item:nth-child(odd) .timeline-content::after {
+  border-color: transparent transparent transparent rgba(255,255,255,0.08);
+}
+body.dark-mode .timeline-item:nth-child(even) .timeline-content::after {
+  border-color: transparent rgba(255,255,255,0.08) transparent transparent;
+}
+</style>
+
+<!-- Projects -->
+<section id="portfolio" data-aos="fade-up" class="py-5">
+  <h2 class="section-title text-center mb-4">Projects</h2>
+  
+  <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+    
+    <!-- Indicators (Dots) -->
+    <div class="carousel-indicators custom-indicators">
+      <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Project 1"></button>
+      <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="1" aria-label="Project 2"></button>
+      <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="2" aria-label="Project 3"></button>
+    </div>
+
+    <div class="carousel-inner">
+
+<!-- Project 1 -->
+<div class="carousel-item active">
+  <div class="d-flex justify-content-center">
+    <div class="card text-center shadow-lg rounded-4 border-0" style="width: 24rem;">
+      <img src="images/pic5.jpg" class="card-img-top rounded-top-4" alt="Project 1">
+      <div class="card-body">
+        <h5 class="card-title fw-bold">Project 1</h5>
+        <p class="card-text text-muted">Short description of project...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Project 2 -->
+<div class="carousel-item">
+  <div class="d-flex justify-content-center">
+    <div class="card text-center shadow-lg rounded-4 border-0" style="width: 24rem;">
+      <img src="images/pic6.jpg" class="card-img-top rounded-top-4" alt="Project 2">
+      <div class="card-body">
+        <h5 class="card-title fw-bold">Project 2</h5>
+        <p class="card-text text-muted">Short description of project...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Project 3 -->
+<div class="carousel-item">
+  <div class="d-flex justify-content-center">
+    <div class="card text-center shadow-lg rounded-4 border-0" style="width: 24rem;">
+      <img src="images/pic7.jpg" class="card-img-top rounded-top-4" alt="Project 3">
+      <div class="card-body">
+        <h5 class="card-title fw-bold">Project 3</h5>
+        <p class="card-text text-muted">Short description of project...</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Custom Controls -->
+<button class="carousel-control-prev custom-control" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
+  <span class="custom-icon" aria-hidden="true">&larr;</span>
+  <span class="visually-hidden">Previous</span>
+</button>
+<button class="carousel-control-next custom-control" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
+  <span class="custom-icon" aria-hidden="true">&rarr;</span>
+  <span class="visually-hidden">Next</span>
+</button>
+</div>
+</section>
+
+<!-- Custom CSS -->
+<style>
+  /* Custom Carousel Controls */
+.custom-control {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 5;
+}
+
+/* Instead of screen edges, position closer to card */
+.carousel-control-prev {
+  left: 15%;   /* move closer to center */
+}
+
+.carousel-control-next {
+  right: 15%;  /* move closer to center */
+}
+
+.custom-control:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.custom-icon {
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: bold;
+}
+
+  /* Custom Indicators */
+  .custom-indicators {
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .custom-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #888;
+    border: none;
+    margin: 0 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .custom-indicators .active {
+    background-color: #333;
+  }
+</style>
+
+
+<!-- Skills Section -->
+<section id="skills" data-aos="fade-up" class="py-5">
+  <h2 class="section-title text-center mb-5">Skills</h2>
+  <div class="container">
+    <div class="row g-5 justify-content-center">
+      <!-- Academic Skill -->
+      <div class="col-md-4 text-center">
+        <div class="skill-circle" data-percentage="90" data-color="#6c63ff">
+          <svg class="progress-ring" width="140" height="140">
+            <circle class="progress-ring__background" cx="70" cy="70" r="60" />
+            <circle class="progress-ring__circle" cx="70" cy="70" r="60" />
+          </svg>
+          <div class="skill-text">0%</div>
+        </div>
+        <h5 class="mt-3 fw-bold">Academic</h5>
+        <p class="text-muted">Possess strong academic skills with a focus on research and academic writing.</p>
+      </div>
+
+      <!-- Technical Skill -->
+      <div class="col-md-4 text-center">
+        <div class="skill-circle" data-percentage="80" data-color="#28a745">
+          <svg class="progress-ring" width="140" height="140">
+            <circle class="progress-ring__background" cx="70" cy="70" r="60" />
+            <circle class="progress-ring__circle" cx="70" cy="70" r="60" />
+          </svg>
+          <div class="skill-text">0%</div>
+        </div>
+        <h5 class="mt-3 fw-bold">Technical</h5>
+        <p class="text-muted">Have technical abilities in web development and basic design.</p>
+      </div>
+
+      <!-- Personal Skill -->
+      <div class="col-md-4 text-center">
+        <div class="skill-circle" data-percentage="85" data-color="#ffc107">
+          <svg class="progress-ring" width="140" height="140">
+            <circle class="progress-ring__background" cx="70" cy="70" r="60" />
+            <circle class="progress-ring__circle" cx="70" cy="70" r="60" />
+          </svg>
+          <div class="skill-text">0%</div>
+        </div>
+        <h5 class="mt-3 fw-bold">Personal</h5>
+        <p class="text-muted">Demonstrate effective personal skills, particularly in team collaboration and leadership.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Custom CSS -->
+<style>
+.skill-circle {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.skill-circle:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.15));
+}
+.progress-ring__background {
+  fill: transparent;
+  stroke: #e6e6e6;
+  stroke-width: 12;
+}
+.progress-ring__circle {
+  fill: transparent;
+  stroke-width: 12;
+  stroke-dasharray: 377;
+  stroke-dashoffset: 377;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.5s ease;
+}
+.skill-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #333;
+}
+</style>
+
+<!-- Animation Script -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const skills = document.querySelectorAll(".skill-circle");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const circleWrapper = entry.target;
+        const percentage = parseInt(circleWrapper.getAttribute("data-percentage"));
+        const color = circleWrapper.getAttribute("data-color");
+        const ring = circleWrapper.querySelector(".progress-ring__circle");
+        const text = circleWrapper.querySelector(".skill-text");
+
+        // Circle animation
+        const radius = 60;
+        const circumference = 2 * Math.PI * radius;
+        const offset = circumference - (percentage / 100) * circumference;
+        ring.style.stroke = color;
+        ring.style.strokeDashoffset = offset;
+
+        // Smooth number count-up
+        let count = 0;
+        const interval = Math.ceil(2000 / percentage); // 2 seconds duration
+        const updateCount = setInterval(() => {
+          count++;
+          text.textContent = count + "%";
+          if (count >= percentage) clearInterval(updateCount);
+        }, interval);
+
+        observer.unobserve(circleWrapper); // animate only once
+      }
+    });
+  }, { threshold: 0.4 });
+
+  skills.forEach(skill => observer.observe(skill));
+});
+</script>
+
+<!-- Contact -->
+<section id="contact" data-aos="zoom-in">
+  <h2 class="section-title">Contact Me</h2>
+  <div class="container text-center">
+    <p>Email: <a href="mailto:fatimablack000@gmail.com">fatimablack000@gmail.com</a></p>
+    <p>
+      <a href="https://www.instagram.com/luckymepancit_bihon/" target="_blank">
+        <i class="fab fa-instagram"></i> Instagram
+      </a> | 
+      <a href="https://github.com/fatimablack000-del" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+      </a> | 
+      <a href="https://www.facebook.com/timtim.black" target="_blank">
+        <i class="fab fa-facebook"></i> Facebook
+      </a>
+    </p>
+
+    <!-- Contact Form (Formspree) -->
+    <form action="https://formspree.io/f/movnbezv" method="POST" class="mt-4" style="max-width:600px; margin:auto;">
+      <input type="text" name="name" class="form-control mb-3" placeholder="Your Name" required>
+      <input type="email" name="email" class="form-control mb-3" placeholder="Your Email" required>
+      <textarea name="message" class="form-control mb-3" rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn-custom">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<div class="footer">
+  <p>© 2025 Fatima Grace G. Itom | All Rights Reserved</p>
+  <p>
+    <a href="https://www.instagram.com/luckymepancit_bihon/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://github.com/fatimablack000-del" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://www.facebook.com/timtim.black" target="_blank"><i class="fab fa-facebook"></i></a>
+  </p>
+</div>
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    // Toggle Mode Script
+    const modeToggle = document.getElementById("modeToggle");
+    const modeText = document.getElementById("modeText");
+    const icon = modeToggle.querySelector("i");
+
+    modeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+
+      if (document.body.classList.contains("dark-mode")) {
+        modeText.textContent = "Dark Mode";
+        icon.classList.remove("fa-sun");
+        icon.classList.add("fa-moon");
+      } else {
+        modeText.textContent = "Light Mode";
+        icon.classList.remove("fa-moon");
+        icon.classList.add("fa-sun");
+      }
+    });
+  </script>
+</body>
+</html>
