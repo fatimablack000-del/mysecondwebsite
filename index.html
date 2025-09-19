@@ -26,6 +26,7 @@
       scroll-behavior: smooth;
       transition: all 0.4s ease;
     }
+    
 
     /* ===== NAVBAR ===== */
     .navbar {
@@ -65,6 +66,31 @@
     .mode-toggle i { margin-left: 8px; }
     body.dark-mode .mode-toggle { background: #111; color: #fff; }
 
+/* ===== RIGHT SIDEBAR ===== */
+.sidebar-right {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 1000;
+}
+.sidebar-right .page-link {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #555;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.sidebar-right .page-link.active,
+.sidebar-right .page-link:hover {
+  color: #800080;
+  font-size: 1.1rem;
+}
+
+
     /* ===== BUTTONS ===== */
     .btn-custom {
       background: linear-gradient(90deg, #800080, #d63384);
@@ -96,35 +122,56 @@
       font-size: 1rem;
       line-height: 1.6;
     }
-    .profile-img {
-      max-width: 300px;
-      border-radius: 50%;
-      border: 6px solid #fff;
-      object-fit: cover;
-      box-shadow: 0 8px 25px rgba(128, 0, 128, 0.3);
-      transition: transform 0.4s;
-    }
-    .profile-img:hover { transform: scale(1.05); }
+.profile-img {
+  max-width: 360px; /* was 300px, now a bit bigger */
+  border-radius: 50%;
+  border: 6px solid #fff;
+  object-fit: cover;
+  box-shadow: 0 8px 25px rgba(128, 0, 128, 0.3);
+  transition: transform 0.4s;
+}
+
+.profile-img:hover {
+  transform: scale(1.05);
+}
 
     /* ===== SECTION TITLES ===== */
-    .section-title {
-      font-size: 2.3rem;
-      font-weight: 700;
-      margin-bottom: 40px;
-      text-align: center;
-      color: #800080;
-      position: relative;
-      display: inline-block;
-    }
-    .section-title::after {
-      content: "";
-      display: block;
-      height: 4px;
-      width: 60%;
-      margin: 10px auto 0;
-      background: linear-gradient(90deg, #800080, #d63384);
-      border-radius: 2px;
-    }
+.section-title {
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;   /* default center for sections like Resume */
+  color: #800080;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  height: 4px;
+  width: 60%;
+  margin: 10px auto 0;  /* default centered underline */
+  background: linear-gradient(90deg, #800080, #d63384);
+  border-radius: 2px;
+}
+
+/* Left-align Projects, Skills, Contact titles fully */
+#portfolio .section-title,
+#skills .section-title,
+#contact .section-title {
+  text-align: left;       /* align text to the left */
+  display: block;
+  margin-left: 0;         /* remove any automatic centering */
+  padding-left: 0;        /* remove container padding if needed */
+}
+#portfolio .section-title::after,
+#skills .section-title::after,
+#contact .section-title::after {
+  width: 60px;            /* short underline */
+  margin: 10px 0 0 0;     /* flush left */
+}
+
 
     /* ===== GLASS CARDS ===== */
     .card,
@@ -242,6 +289,17 @@
     </div>
   </nav>
 
+
+<!-- Right Sidebar (Page Navigation) -->
+<div class="sidebar-right">
+  <a href="#home" class="page-link active">01</a>
+  <a href="#resume" class="page-link">02</a>
+  <a href="#portfolio" class="page-link">03</a>
+  <a href="#skills" class="page-link">04</a>
+  <a href="#contact" class="page-link">05</a>
+</div>
+
+
   <!-- Hero Section -->
   <section id="home" data-aos="fade-up">
     <div class="row">
@@ -260,14 +318,18 @@
     </div>
   </section>
 
-<!-- Resume / CV -->
-<section id="resume" data-aos="fade-up" class="py-5">
+<!-- Resume + Skills -->
+<section id="resume" data-aos="fade-up" class="py-3">
   <div class="container">
-    <h2 class="section-title text-center mb-5">Resume / CV</h2>
+    <h2 class="section-title mb-5">Resume</h2>
 
-    <!-- Education Timeline -->
-    <h4 class="fw-bold mb-4 text-primary text-center">Education</h4>
-    <div class="timeline">
+    <!-- Education Section -->
+<section id="education" class="py-5">
+  <div class="container text-center">
+    <h2 class="section-title mb-4 fs-3">Education</h2>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-10">
+        <div class="timeline">
 
       <!-- College - Current -->
       <div class="timeline-item">
@@ -308,84 +370,89 @@
       </div>
     </div>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-5">
-      <div class="container text-center">
-        <h2 class="section-title mb-5">Skills</h2>
-        <div class="row g-4 justify-content-center">
+<!-- Core Competencies -->
+<section id="core-competencies" class="py-5">
+  <div class="container text-center">
+    <h2 class="section-title mb-4 fs-3">Core Competencies</h2>
+    <div class="row g-4 justify-content-center">
 
-          <!-- Technical -->
-          <div class="col-md-4">
-            <div class="glass-card h-100">
-              <h4 class="fw-bold text-success">Technical</h4>
-              <p>
-                Can build simple websites using <strong>HTML</strong> and 
-                <strong>CSS</strong>, with basic <strong>JavaScript</strong>.
-              </p>
-            </div>
+      <!-- Technical -->
+      <div class="col-md-4">
+        <div class="gradient-card h-100 p-4">
+          <div class="icon mb-3">
+            <i class="fas fa-laptop-code fa-2x text-success"></i>
           </div>
-
-          <!-- Academic -->
-          <div class="col-md-4">
-            <div class="glass-card h-100">
-              <h4 class="fw-bold text-primary">Academic</h4>
-              <p>
-                Experienced in <strong>Research</strong>, 
-                <strong>Academic Writing</strong>, and <strong>Presentations</strong>.
-              </p>
-            </div>
-          </div>
-
-          <!-- Soft Skills -->
-          <div class="col-md-4">
-            <div class="glass-card h-100">
-              <h4 class="fw-bold text-warning">Soft Skills</h4>
-              <p>
-                Strong <strong>Communication</strong>, <strong>Teamwork</strong>, 
-                and <strong>Leadership</strong>. Adaptable and skilled in 
-                <strong>Problem-Solving</strong>.
-              </p>
-            </div>
-          </div>
-
+          <h4 class="fw-bold text-success">Technical</h4>
+          <p>
+            Can build simple websites using <strong>HTML</strong>, 
+            <strong>CSS</strong>, with basic <strong>JavaScript</strong>.
+          </p>
         </div>
       </div>
-    </section>
 
-    <!-- Download CV -->
-<div class="text-center mt-5">
-  <a href="resume.pdf" class="btn-custom d-inline-block">
-    <i class="bi bi-download"></i> Download CV
-  </a>
-</div>
+      <!-- Academic -->
+      <div class="col-md-4">
+        <div class="gradient-card h-100 p-4">
+          <div class="icon mb-3">
+            <i class="fas fa-graduation-cap fa-2x text-primary"></i>
+          </div>
+          <h4 class="fw-bold text-primary">Academic</h4>
+          <p>
+            Experienced in <strong>Research</strong>, 
+            <strong>Academic Writing</strong>, and <strong>Presentations</strong>.
+          </p>
+        </div>
+      </div>
 
+      <!-- Soft Skills -->
+      <div class="col-md-4">
+        <div class="gradient-card h-100 p-4">
+          <div class="icon mb-3">
+            <i class="fas fa-handshake fa-2x text-warning"></i>
+          </div>
+          <h4 class="fw-bold text-warning">Soft Skills</h4>
+          <p>
+            Strong <strong>Communication</strong>, <strong>Teamwork</strong>, 
+            and <strong>Leadership</strong>. Adaptable and skilled in 
+            <strong>Problem-Solving</strong>.
+          </p>
+        </div>
+      </div>
 
-<!-- Resume & Glassy CSS -->
+    </div>
+  </div>
+</section>
+
+<!-- Styles for Core Competencies -->
 <style>
-/* Shared Glassy Style */
-.glass-card {
-  background: rgba(255, 255, 255, 0.15);
+/* Gradient Glass Effect */
+.gradient-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.15));
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 1.5rem;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   color: #000;
 }
-
-.glass-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+.gradient-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+.gradient-card .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Timeline */
+/* Timeline (your original style, unchanged) */
 .timeline {
   position: relative;
   margin: 0 auto;
-  padding: 2rem 0;
-  max-width: 800px;
+  padding: 1rem 0;
+  max-width: 700px;
 }
 .timeline::before {
   content: "";
@@ -393,81 +460,48 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 4px;
+  width: 3px;
   height: 100%;
   background: #ccc;
 }
-
 .timeline-item {
   position: relative;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem; /* less space between items  */
   width: 50%;
   padding: 0 1rem;
 }
-.timeline-item:nth-child(odd) {
-  left: 0;
-  text-align: right;
-}
-.timeline-item:nth-child(even) {
-  left: 50%;
-  text-align: left;
-}
-
+.timeline-item:nth-child(odd) { left: 0; text-align: right; }
+.timeline-item:nth-child(even) { left: 50%; text-align: left; }
 .timeline-dot {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   background: #6c63ff;
   border-radius: 50%;
-  box-shadow: 0 0 0 4px #fff;
+  box-shadow: 0 0 0 3px #fff;
   z-index: 2;
 }
-
-.timeline-content {
-  margin-top: 40px; /* space below dot */
-}
-
-/* Arrows */
-.timeline-item:nth-child(odd) .timeline-content::after {
-  content: "";
-  position: absolute;
-  top: 20px;
-  right: -10px;
-  border-width: 8px;
-  border-style: solid;
-  border-color: transparent transparent transparent rgba(255, 255, 255, 0.15);
-}
-.timeline-item:nth-child(even) .timeline-content::after {
-  content: "";
-  position: absolute;
-  top: 20px;
-  left: -10px;
-  border-width: 8px;
-  border-style: solid;
-  border-color: transparent rgba(255, 255, 255, 0.15) transparent transparent;
-}
+.timeline-content { margin-top: 25px; } /* tighter below dot */
 
 /* Dark mode */
 body.dark-mode .timeline::before { background: #666; }
-body.dark-mode .timeline-dot { background: #ff69b4; box-shadow: 0 0 0 4px #222; }
-body.dark-mode .glass-card {
-  background: rgba(255, 255, 255, 0.08);
+body.dark-mode .timeline-dot { background: #ff69b4; box-shadow: 0 0 0 3px #222; }
+body.dark-mode .gradient-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
   color: #fff;
-}
-body.dark-mode .timeline-item:nth-child(odd) .timeline-content::after {
-  border-color: transparent transparent transparent rgba(255,255,255,0.08);
-}
-body.dark-mode .timeline-item:nth-child(even) .timeline-content::after {
-  border-color: transparent rgba(255,255,255,0.08) transparent transparent;
 }
 </style>
 
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
 <!-- Projects -->
 <section id="portfolio" data-aos="fade-up" class="py-5">
-  <h2 class="section-title text-center mb-4">Projects</h2>
+  <div class="container">
+    <h2 class="section-title mb-5">Projects</h2>
   
   <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
     
@@ -550,13 +584,12 @@ body.dark-mode .timeline-item:nth-child(even) .timeline-content::after {
   z-index: 5;
 }
 
-/* Instead of screen edges, position closer to card */
 .carousel-control-prev {
-  left: 15%;   /* move closer to center */
+  left: 2%;   /* almost hugging the left side of the card */
 }
 
 .carousel-control-next {
-  right: 15%;  /* move closer to center */
+  right: 2%;  /* almost hugging the right side of the card */
 }
 
 .custom-control:hover {
@@ -596,8 +629,8 @@ body.dark-mode .timeline-item:nth-child(even) .timeline-content::after {
 
 <!-- Skills Section -->
 <section id="skills" data-aos="fade-up" class="py-5">
-  <h2 class="section-title text-center mb-5">Skills</h2>
   <div class="container">
+    <h2 class="section-title mb-5">Skills</h2>
     <div class="row g-5 justify-content-center">
       <!-- Academic Skill -->
       <div class="col-md-4 text-center">
@@ -716,17 +749,17 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 <!-- Contact -->
-<section id="contact" data-aos="zoom-in">
-  <h2 class="section-title">Contact Me</h2>
+<section id="contact" data-aos="zoom-in" class="py-5">
   <div class="container text-center">
+    <h2 class="section-title mb-5">Contact Me</h2>
     <p>Email: <a href="mailto:fatimablack000@gmail.com">fatimablack000@gmail.com</a></p>
     <p>
       <a href="https://www.instagram.com/luckymepancit_bihon/" target="_blank">
         <i class="fab fa-instagram"></i> Instagram
-      </a> | 
+      </a> |
       <a href="https://github.com/fatimablack000-del" target="_blank">
         <i class="fab fa-github"></i> GitHub
-      </a> | 
+      </a> |
       <a href="https://www.facebook.com/timtim.black" target="_blank">
         <i class="fab fa-facebook"></i> Facebook
       </a>
@@ -779,5 +812,31 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   </script>
+
+<script>
+  // Highlight active section number on scroll
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll(".sidebar-right .page-link");
+
+  window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop - 100;
+      const sectionHeight = section.clientHeight;
+      if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+        current = section.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+      if (link.getAttribute("href").includes(current)) {
+        link.classList.add("active");
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
